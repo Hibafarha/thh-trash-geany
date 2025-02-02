@@ -70,49 +70,7 @@ If the distance is below a certain threshold (e.g., 15 cm), open the lid.
 After a specified time, or once the object is no longer in range, close the lid.
 Example Arduino Code:
 
-cpp
-Copy
-#include <Servo.h>
 
-const int trigPin = 9;  // Ultrasonic sensor trigger pin
-const int echoPin = 10; // Ultrasonic sensor echo pin
-Servo dustbinServo;     // Servo motor object
-
-long duration;
-int distance;
-
-void setup() {
-  pinMode(trigPin, OUTPUT);
-  pinMode(echoPin, INPUT);
-  dustbinServo.attach(6); // Pin 6 to control servo
-  dustbinServo.write(0);  // Start with the lid closed
-  Serial.begin(9600);
-}
-
-void loop() {
-  // Send a pulse from the ultrasonic sensor
-  digitalWrite(trigPin, LOW);
-  delayMicroseconds(2);
-  digitalWrite(trigPin, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(trigPin, LOW);
-
-  // Measure the pulse duration
-  duration = pulseIn(echoPin, HIGH);
-  distance = duration * 0.034 / 2;
-
-  // Print distance to the serial monitor (optional for debugging)
-  Serial.print("Distance: ");
-  Serial.println(distance);
-
-  // If object is within 15 cm, open the lid
-  if (distance < 15) {
-    dustbinServo.write(90); // Open lid (90 degrees)
-    delay(5000); // Keep the lid open for 5 seconds
-    dustbinServo.write(0);  // Close lid
-  }
-
-  delay(100); // Small delay before next measurement
 }
 Considerations:
 
@@ -168,7 +126,7 @@ Build Photos
 
 Project Demo
 Video
-[Add your demo video link here] Explain what the video demonstrates
+https://github.com/Hibafarha/thh-trash-geany/blob/e142323247aeda1d63cfe3e0083bb64cf7c14719/mp4.mp4
 
 Additional Demos
 [Add any extra demo materials/links]
